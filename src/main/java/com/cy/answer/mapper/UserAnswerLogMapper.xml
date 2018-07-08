@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cy.answer.dao.QuestionMapper" >
-  <resultMap id="BaseResultMap" type="com.cy.answer.model.Question" >
+<mapper namespace="com.cy.answer.dao.UserAnswerLogMapper" >
+  <resultMap id="BaseResultMap" type="com.cy.answer.model.UserAnswerLog" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="answer" property="answer" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="VARCHAR" />
-    <result column="options" property="options" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="question_id" property="questionId" jdbcType="INTEGER" />
+    <result column="result" property="result" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, content, answer, type, options
+    id, user_id, question_id, result, create_time
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cy.answer.model.QuestionExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cy.answer.model.UserAnswerLogExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from question
+    from user_answer_log
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,85 +86,85 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from question
+    from user_answer_log
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from question
+    delete from user_answer_log
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cy.answer.model.QuestionExample" >
-    delete from question
+  <delete id="deleteByExample" parameterType="com.cy.answer.model.UserAnswerLogExample" >
+    delete from user_answer_log
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cy.answer.model.Question" >
-    insert into question (id, content, answer, 
-      type, options)
-    values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR}, #{options,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.cy.answer.model.UserAnswerLog" >
+    insert into user_answer_log (id, user_id, question_id, 
+      result, create_time)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, 
+      #{result,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.cy.answer.model.Question" >
-    insert into question
+  <insert id="insertSelective" parameterType="com.cy.answer.model.UserAnswerLog" >
+    insert into user_answer_log
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="content != null" >
-        content,
+      <if test="userId != null" >
+        user_id,
       </if>
-      <if test="answer != null" >
-        answer,
+      <if test="questionId != null" >
+        question_id,
       </if>
-      <if test="type != null" >
-        type,
+      <if test="result != null" >
+        result,
       </if>
-      <if test="options != null" >
-        options,
+      <if test="createTime != null" >
+        create_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="content != null" >
-        #{content,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
       </if>
-      <if test="answer != null" >
-        #{answer,jdbcType=VARCHAR},
+      <if test="questionId != null" >
+        #{questionId,jdbcType=INTEGER},
       </if>
-      <if test="type != null" >
-        #{type,jdbcType=VARCHAR},
+      <if test="result != null" >
+        #{result,jdbcType=INTEGER},
       </if>
-      <if test="options != null" >
-        #{options,jdbcType=VARCHAR},
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cy.answer.model.QuestionExample" resultType="java.lang.Integer" >
-    select count(*) from question
+  <select id="countByExample" parameterType="com.cy.answer.model.UserAnswerLogExample" resultType="java.lang.Integer" >
+    select count(*) from user_answer_log
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update question
+    update user_answer_log
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.content != null" >
-        content = #{record.content,jdbcType=VARCHAR},
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.answer != null" >
-        answer = #{record.answer,jdbcType=VARCHAR},
+      <if test="record.questionId != null" >
+        question_id = #{record.questionId,jdbcType=INTEGER},
       </if>
-      <if test="record.type != null" >
-        type = #{record.type,jdbcType=VARCHAR},
+      <if test="record.result != null" >
+        result = #{record.result,jdbcType=INTEGER},
       </if>
-      <if test="record.options != null" >
-        options = #{record.options,jdbcType=VARCHAR},
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -172,40 +172,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update question
+    update user_answer_log
     set id = #{record.id,jdbcType=INTEGER},
-      content = #{record.content,jdbcType=VARCHAR},
-      answer = #{record.answer,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=VARCHAR},
-      options = #{record.options,jdbcType=VARCHAR}
+      user_id = #{record.userId,jdbcType=INTEGER},
+      question_id = #{record.questionId,jdbcType=INTEGER},
+      result = #{record.result,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cy.answer.model.Question" >
-    update question
+  <update id="updateByPrimaryKeySelective" parameterType="com.cy.answer.model.UserAnswerLog" >
+    update user_answer_log
     <set >
-      <if test="content != null" >
-        content = #{content,jdbcType=VARCHAR},
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="answer != null" >
-        answer = #{answer,jdbcType=VARCHAR},
+      <if test="questionId != null" >
+        question_id = #{questionId,jdbcType=INTEGER},
       </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=VARCHAR},
+      <if test="result != null" >
+        result = #{result,jdbcType=INTEGER},
       </if>
-      <if test="options != null" >
-        options = #{options,jdbcType=VARCHAR},
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cy.answer.model.Question" >
-    update question
-    set content = #{content,jdbcType=VARCHAR},
-      answer = #{answer,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR},
-      options = #{options,jdbcType=VARCHAR}
+  <update id="updateByPrimaryKey" parameterType="com.cy.answer.model.UserAnswerLog" >
+    update user_answer_log
+    set user_id = #{userId,jdbcType=INTEGER},
+      question_id = #{questionId,jdbcType=INTEGER},
+      result = #{result,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

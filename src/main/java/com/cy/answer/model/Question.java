@@ -9,6 +9,8 @@ public class Question {
 
     private String type;
 
+    private String options;
+
     public Integer getId() {
         return id;
     }
@@ -39,5 +41,13 @@ public class Question {
 
     public void setType(String type) {
         this.type = type == null ? null : type.trim();
+    }
+
+    public String getOptions() {
+        return options;
+    }
+
+    public void setOptions(String options) {
+        this.options = options == null ? null : options.trim();
     }
 }
