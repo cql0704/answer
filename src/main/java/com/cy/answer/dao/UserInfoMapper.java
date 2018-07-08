@@ -28,5 +28,10 @@ public interface UserInfoMapper {
 
     int updateByPrimaryKey(UserInfo record);
     
-    //UserInfo selectBy
+    /**
+     * 根据微信查找用户信息
+     * @param wxId
+     * @return
+     */
+    UserInfo selectByWxId(String wxId);
 }

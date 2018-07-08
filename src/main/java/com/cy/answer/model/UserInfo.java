@@ -2,17 +2,23 @@ package com.cy.answer.model;
 
 import java.util.Date;
 
+/**
+ * 用户信息
+ * @author cql
+ *
+ */
 public class UserInfo {
+	//用户id
     private Integer userId;
-
+    //微信id
     private String wxId;
-
+    //微信头像
     private String headImage;
-
+    //微信昵称
     private String nickName;
-
+    //注册时间
     private Date registTime;
-
+    //最后登录时间
     private Date lastLoginTime;
 
     public Integer getUserId() {
@@ -62,4 +68,12 @@ public class UserInfo {
     public void setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
     }
+
+	@Override
+	public String toString() {
+		return "UserInfo [userId=" + userId + ", wxId=" + wxId + ", headImage=" + headImage + ", nickName=" + nickName
+				+ ", registTime=" + registTime + ", lastLoginTime=" + lastLoginTime + "]";
+	}
+    
+    
 }
